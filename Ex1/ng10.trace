@@ -1,0 +1,282 @@
+%EventDef PajeDefineContainerType 0 
+%       Alias string 
+%       Type string 
+%       Name string 
+%EndEventDef 
+%EventDef PajeDefineVariableType 1 
+%       Alias string 
+%       Type string 
+%       Name string 
+%       Color color 
+%EndEventDef 
+%EventDef PajeDefineStateType 2 
+%       Alias string 
+%       Type string 
+%       Name string 
+%EndEventDef 
+%EventDef PajeDefineEventType 3 
+%       Alias string 
+%       Type string 
+%       Name string 
+%       Color color 
+%EndEventDef 
+%EventDef PajeDefineLinkType 4 
+%       Alias string 
+%       Type string 
+%       StartContainerType string 
+%       EndContainerType string 
+%       Name string 
+%EndEventDef 
+%EventDef PajeDefineEntityValue 5 
+%       Alias string 
+%       Type string 
+%       Name string 
+%       Color color 
+%EndEventDef 
+%EventDef PajeCreateContainer 6 
+%       Time date 
+%       Alias string 
+%       Type string 
+%       Container string 
+%       Name string 
+%EndEventDef 
+%EventDef PajeDestroyContainer 7 
+%       Time date 
+%       Type string 
+%       Name string 
+%EndEventDef 
+%EventDef PajeSetVariable 8 
+%       Time date 
+%       Type string 
+%       Container string 
+%       Value double 
+%EndEventDef
+%EventDef PajeAddVariable 9 
+%       Time date 
+%       Type string 
+%       Container string 
+%       Value double 
+%EndEventDef
+%EventDef PajeSubVariable 10 
+%       Time date 
+%       Type string 
+%       Container string 
+%       Value double 
+%EndEventDef
+%EventDef PajeSetState 11 
+%       Time date 
+%       Type string 
+%       Container string 
+%       Value string 
+%EndEventDef
+%EventDef PajePushState 12 
+%       Time date 
+%       Type string 
+%       Container string 
+%       Value string 
+%       Id string 
+%EndEventDef
+%EventDef PajePopState 13 
+%       Time date 
+%       Type string 
+%       Container string 
+%EndEventDef
+%EventDef PajeResetState 14 
+%       Time date 
+%       Type string 
+%       Container string 
+%EndEventDef
+%EventDef PajeStartLink 15 
+%       Time date 
+%       Type string 
+%       Container string 
+%       Value string 
+%       StartContainer string 
+%       Key string 
+%EndEventDef
+%EventDef PajeEndLink 16 
+%       Time date 
+%       Type string 
+%       Container string 
+%       Value string 
+%       EndContainer string 
+%       Key string 
+%EndEventDef
+%EventDef PajeNewEvent 17 
+%       Time date 
+%       Type string 
+%       Container string 
+%       Value string 
+%EndEventDef
+0	a1	0	"Task Manager"
+0	a2	a1	"Node"
+0	a3	a1	"Thread"
+0	a4	a1	"Jobs"
+0	a5	a1	"Memory usage"
+2	a6	a4	"Job"
+2	a7	a3	"Task"
+2	a8	a3	"Timer state"
+6	0	a9	a1	0	"The task manager"
+6	0	a10	a4	a9	"Jobs"
+6	0	a11	a5	a9	"Memory"
+1	a12	a1	"Memory [MB]"	"1.0 1.0 1.0"
+6	0	a13	a2	a9	"Node 0"
+6	0	a14	a3	a13	"Thread 0"
+5	a15	a8	"BaseVector::InnerProduct (taskhandler)"	"1 0 -2.60213991978721"
+5	a16	a8	"Apply Matrix - DG"	"0 0.984300814798172 1"
+5	a17	a8	"Apply Matrix - volume"	"0 1 0.463463405255104"
+5	a18	a8	"Apply Matrix"	"0.752669970214523 0 1"
+5	a19	a8	"Pardiso Solve, mat = d, vec = d"	"0.0345216924405014 0 1"
+5	a20	a8	"SparseMatrix::MultAdd"	"0.2605166920136 1 0"
+5	a21	a8	"BaseVector::Add"	"0 1 0.115974093814375"
+5	a22	a8	"BaseVector::Set"	"0 1 0.0331402709784779"
+5	a23	a8	"Pardiso Inverse"	"0.35690558896328 0 1"
+5	a24	a8	"Assemble Linearization - SpecialElements"	"0 0.259089438305024 1"
+5	a25	a8	"Assemble Linearization - volume"	"1 0.242783099469445 0"
+5	a26	a8	"Assemble Linearization"	"1 0 -2.48365676612213"
+5	a27	a8	"timer setvalues"	"0 0.340416249432698 1"
+5	a28	a8	"S_BaseVector::SetScalar"	"1 0 -2.75482329080226"
+5	a29	a8	"NewtonSolver.Solve"	"0.75645388820126 1 0"
+6	0	a30	a3	a9	"Timer level 0"
+6	0	a31	a3	a9	"Timer level 1"
+6	0	a32	a3	a9	"Timer level 2"
+4	a33	a2	a3	a3	"links"
+8	0	a12	a11	0
+12	0.1280345886627	a8	a30	a27	0
+12	0.133988618114016	a8	a31	a28	0
+13	0.136349261624177	a8	a31
+13	0.395190225015933	a8	a30
+12	0.431948425252668	a8	a30	a26	0
+12	0.433521730767713	a8	a31	a28	0
+13	0.564311659794521	a8	a31
+12	0.565218914368528	a8	a31	a25	0
+13	22.6859341996775	a8	a31
+12	22.6863652141239	a8	a31	a24	0
+13	22.6871710535341	a8	a31
+13	22.6918114825183	a8	a30
+12	22.7235030359876	a8	a30	a23	0
+13	46.7953748092872	a8	a30
+12	46.8459323241851	a8	a30	a22	0
+13	46.8494667796932	a8	a30
+12	46.8495565458179	a8	a30	a21	0
+13	46.8516362419147	a8	a30
+12	46.8632229243859	a8	a30	a28	0
+13	46.8652251886346	a8	a30
+12	46.8657596739576	a8	a30	a20	0
+13	47.0957069089751	a8	a30
+12	47.1257723936345	a8	a30	a19	0
+13	48.1644802066586	a8	a30
+12	48.1661042197556	a8	a30	a21	0
+13	48.1700066478515	a8	a30
+12	48.1930827090556	a8	a30	a22	0
+13	48.1932307203759	a8	a30
+12	48.2051079435868	a8	a30	a21	0
+13	48.2073541524188	a8	a30
+12	48.208588265325	a8	a30	a22	0
+13	48.2086341762438	a8	a30
+12	48.2291090755423	a8	a30	a29	0
+12	48.275322869334	a8	a31	a26	0
+12	48.2823122927893	a8	a32	a28	0
+13	48.4284899172194	a8	a32
+12	48.4292299738205	a8	a32	a25	0
+13	70.9160163126028	a8	a32
+12	70.9168612105558	a8	a32	a24	0
+13	70.9178205431869	a8	a32
+13	70.9238869516036	a8	a31
+12	70.9428077320398	a8	a31	a28	0
+13	70.9452101750432	a8	a31
+12	70.946346984211	a8	a31	a18	0
+12	70.9476907351322	a8	a32	a17	0
+13	73.0913578726859	a8	a32
+12	73.0915490539745	a8	a32	a16	0
+13	73.0916963800571	a8	a32
+13	73.0919464917788	a8	a31
+12	73.1209101143877	a8	a31	a23	0
+13	99.0139748431891	a8	a31
+12	99.1112614505491	a8	a31	a19	0
+13	99.8774379382977	a8	a31
+12	99.8972598061695	a8	a31	a15	0
+13	99.900449587168	a8	a31
+12	99.9543839529274	a8	a31	a21	0
+13	99.9567802287924	a8	a31
+12	99.9630700246646	a8	a31	a22	0
+13	99.963307116872	a8	a31
+12	99.9726921309548	a8	a31	a26	0
+12	99.9801468307363	a8	a32	a28	0
+13	100.112311346376	a8	a32
+12	100.113673598712	a8	a32	a25	0
+13	122.295755336721	a8	a32
+12	122.296502930936	a8	a32	a24	0
+13	122.29785147852	a8	a32
+13	122.304366032323	a8	a31
+12	122.324401694324	a8	a31	a28	0
+13	122.326939129134	a8	a31
+12	122.328352089052	a8	a31	a18	0
+12	122.32956564483	a8	a32	a17	0
+13	124.50376902527	a8	a32
+12	124.504129460244	a8	a32	a16	0
+13	124.504482357605	a8	a32
+13	124.504653667004	a8	a31
+12	124.53561407196	a8	a31	a23	0
+13	150.001544169605	a8	a31
+12	150.093559929394	a8	a31	a19	0
+13	150.920064734889	a8	a31
+12	150.940088062613	a8	a31	a15	0
+13	150.943344996896	a8	a31
+12	151.066680911379	a8	a31	a21	0
+13	151.068988791594	a8	a31
+12	151.075950120308	a8	a31	a22	0
+13	151.076024811206	a8	a31
+12	151.086315709387	a8	a31	a26	0
+12	151.09259385622	a8	a32	a28	0
+13	151.229028087306	a8	a32
+12	151.230096372715	a8	a32	a25	0
+13	173.468018807469	a8	a32
+12	173.468661560332	a8	a32	a24	0
+13	173.469655154843	a8	a32
+13	173.475626315234	a8	a31
+12	173.494629324181	a8	a31	a28	0
+13	173.496689833625	a8	a31
+12	173.497871868474	a8	a31	a18	0
+12	173.499038828096	a8	a32	a17	0
+13	175.620264434458	a8	a32
+12	175.620350774394	a8	a32	a16	0
+13	175.620489192388	a8	a32
+13	175.620846201175	a8	a31
+12	175.650766415464	a8	a31	a23	0
+13	201.549397329239	a8	a31
+12	201.637725140299	a8	a31	a19	0
+13	202.340767262356	a8	a31
+12	202.356281726714	a8	a31	a15	0
+13	202.359495491028	a8	a31
+12	202.413300346883	a8	a31	a21	0
+13	202.415356744901	a8	a31
+12	202.422200212749	a8	a31	a22	0
+13	202.422273533172	a8	a31
+12	202.431711310549	a8	a31	a26	0
+12	202.438547240784	a8	a32	a28	0
+13	202.567770716671	a8	a32
+12	202.568992495301	a8	a32	a25	0
+13	225.016826503071	a8	a32
+12	225.017396620749	a8	a32	a24	0
+13	225.018560154183	a8	a32
+13	225.025179549338	a8	a31
+12	225.044031806015	a8	a31	a28	0
+13	225.046194415861	a8	a31
+12	225.047366172146	a8	a31	a18	0
+12	225.048381009022	a8	a32	a17	0
+13	227.190159631767	a8	a32
+12	227.190320662602	a8	a32	a16	0
+13	227.190563921948	a8	a32
+13	227.190827053184	a8	a31
+12	227.222208879261	a8	a31	a23	0
+13	253.364534949894	a8	a31
+12	253.455432401931	a8	a31	a19	0
+13	254.242807399877	a8	a31
+12	254.262301724179	a8	a31	a15	0
+13	254.265324992442	a8	a31
+12	254.324561726702	a8	a31	a21	0
+13	254.326707890845	a8	a31
+12	254.333058672863	a8	a31	a22	0
+13	254.333205998946	a8	a31
+13	254.340420180332	a8	a30

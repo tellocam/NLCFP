@@ -1,0 +1,69 @@
+
+<head>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://unpkg.com/sunburst-chart"></script>
+
+  <style>body { margin: 0 }</style>
+
+</head>
+<body>
+  <div id="chart"></div>
+
+  <script>
+    const data = 
+{ name: "all", calls: 1, size: 0, value: 339.6, min: 339.6, max: 339.6, avg: 339.6, children: [{ name: "Pardiso Solve, mat = d, vec = d", calls: 1, size: 2.528, value: 2.528, min: 2.528, max: 2.528, avg: 2.528} , { name: "SparseMatrix::MultAdd", calls: 1, size: 0.3666, value: 0.3666, min: 0.3666, max: 0.3666, avg: 0.3666} , { name: "BaseVector::Add", calls: 3, size: 0.009885, value: 0.009885, min: 0.002581, max: 0.004489, avg: 0.003295} , { name: "BaseVector::Set", calls: 3, size: 0.01138, value: 0.01138, min: 5.002e-05, max: 0.01116, avg: 0.003793} , { name: "Pardiso Inverse", calls: 1, size: 37.63, value: 37.63, min: 37.63, max: 37.63, avg: 37.63} , { name: "Assemble Linearization", calls: 1, size: 0.0178, value: 42.74, min: 42.74, max: 42.74, avg: 42.74, children: [{ name: "Assemble Linearization - SpecialElements", calls: 1, size: 0.001444, value: 0.001444, min: 0.001444, max: 0.001444, avg: 0.001444} , { name: "Assemble Linearization - volume", calls: 1, size: 41.58, value: 41.58, min: 41.58, max: 41.58, avg: 41.58} , { name: "S_BaseVector::SetScalar", calls: 1, size: 1.142, value: 1.142, min: 1.142, max: 1.142, avg: 1.142}]} , { name: "timer setvalues", calls: 1, size: 0.5152, value: 0.5192, min: 0.5192, max: 0.5192, avg: 0.5192, children: [{ name: "S_BaseVector::SetScalar", calls: 1, size: 0.003984, value: 0.003984, min: 0.003984, max: 0.003984, avg: 0.003984}]} , { name: "S_BaseVector::SetScalar", calls: 1, size: 0.002686, value: 0.002686, min: 0.002686, max: 0.002686, avg: 0.002686} , { name: "NewtonSolver.Solve", calls: 1, size: 1.334, value: 255.2, min: 255.2, max: 255.2, avg: 255.2, children: [{ name: "BaseVector::InnerProduct (taskhandler)", calls: 4, size: 0.02058, value: 0.02058, min: 0.003285, max: 0.01033, avg: 0.005146} , { name: "Apply Matrix", calls: 4, size: 0.01146, value: 9.29, min: 2.173, max: 2.504, avg: 2.322, children: [{ name: "Apply Matrix - DG", calls: 4, size: 0.0009854, value: 0.0009854, min: 5.345e-05, max: 0.0005763, avg: 0.0002463} , { name: "Apply Matrix - volume", calls: 4, size: 9.277, value: 9.277, min: 2.171, max: 2.498, avg: 2.319}]} , { name: "Pardiso Solve, mat = d, vec = d", calls: 4, size: 4.069, value: 4.069, min: 0.8025, max: 1.569, avg: 1.017} , { name: "BaseVector::Add", calls: 4, size: 0.01411, value: 0.01411, min: 0.002243, max: 0.007101, avg: 0.003527} , { name: "BaseVector::Set", calls: 4, size: 0.00032, value: 0.00032, min: 7.606e-05, max: 8.908e-05, avg: 8e-05} , { name: "Pardiso Inverse", calls: 4, size: 125.5, value: 125.5, min: 28.23, max: 33.87, avg: 31.38} , { name: "Assemble Linearization", calls: 4, size: 0.07933, value: 115, min: 24.45, max: 37.72, avg: 28.74, children: [{ name: "Assemble Linearization - SpecialElements", calls: 4, size: 0.005055, value: 0.005055, min: 0.001058, max: 0.001612, avg: 0.001264} , { name: "Assemble Linearization - volume", calls: 4, size: 114.3, value: 114.3, min: 24.29, max: 37.54, avg: 28.56} , { name: "S_BaseVector::SetScalar", calls: 4, size: 0.6116, value: 0.6116, min: 0.1358, max: 0.1662, avg: 0.1529}]} , { name: "S_BaseVector::SetScalar", calls: 4, size: 0.01306, value: 0.01306, min: 0.00291, max: 0.003616, avg: 0.003266}]}]};
+
+const chart_type = 'time';
+
+    const color = d3.scaleOrdinal(d3.schemePaired);
+
+    let getTime = (t) =>
+    {
+       if(t>=1000)  return (t/1000).toPrecision(4) + '  s';
+       if(t>=0.1)   return t.toPrecision(4) + ' ms';
+       if(t>=1e-4)  return (t*1e3).toPrecision(4) + ' us';
+
+       return (t/1e6).toPrecision(4) + ' ns';
+    };
+
+    const KB_ = 1024;
+    const MB_ = KB_*1024;
+    const GB_ = MB_*1024;
+    let getMemory = (m) =>
+    {
+       if(m>=GB_)  return (m/GB_).toPrecision(4) + ' GB';
+       if(m>=MB_)  return (m/MB_).toPrecision(4) + ' MB';
+       if(m>=KB_)  return (m/KB_).toPrecision(4) + ' KB';
+       return m.toPrecision(4) + ' B';
+    };
+
+    Sunburst()
+      .data(data)
+      .size('size')
+      .color(d => color(d.name))
+      .tooltipTitle((d, node) => { return node.parent ? node.parent.data.name + " &rarr; " + d.name : d.name; })
+      .tooltipContent((d, node) => {
+        if(chart_type=="memory")
+        {
+          return `Total Memory: <i>${getMemory(d.value)}</i> <br>`
+               + `Memory: <i>${getMemory(d.size)}</i>`
+        }
+        else
+        {
+          return `Time: <i>${getTime(d.value)}</i> <br>`
+               + `calls: <i>${d.calls}</i> <br>`
+               + `min: <i>${getTime(d.min)}</i> <br>`
+               + `max: <i>${getTime(d.max)}</i> <br>`
+               + `avg: <i>${getTime(d.avg)}</i>`
+        }
+      })
+      (document.getElementById('chart'));
+
+      // Line breaks in tooltip
+      var all = document.getElementsByClassName('sunbirst-tooltip');
+      for (var i = 0; i < all.length; i++) {
+          all[i].white_space = "";
+      }
+  </script>
+</body>
+
