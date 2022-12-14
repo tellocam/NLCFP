@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<VTKFile type ="Collection" version="1.0" byte_order="LittleEndian">
+<Collection>
+<DataSet timestep="0" file="output.vtu"/>
+<DataSet timestep="5" file="output_step00001.vtu"/>
+<DataSet timestep="10" file="output_step00002.vtu"/>
+<DataSet timestep="15" file="output_step00003.vtu"/>
+<DataSet timestep="20" file="output_step00004.vtu"/>
+<DataSet timestep="25" file="output_step00005.vtu"/>
+<DataSet timestep="30" file="output_step00006.vtu"/>
+</Collection>
+</VTKFile>
