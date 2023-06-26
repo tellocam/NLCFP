@@ -1,0 +1,69 @@
+
+<head>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://unpkg.com/sunburst-chart"></script>
+
+  <style>body { margin: 0 }</style>
+
+</head>
+<body>
+  <div id="chart"></div>
+
+  <script>
+    const data = 
+{ name: "all", calls: 1, size: 0, value: 1.25, min: 1.25, max: 1.25, avg: 1.25, children: [{ name: "ngcore::ParallelFor<int,ngcore::EnterTaskManager()::{lambda(int)#1}>(ngcore::T_Range<int>,ngcore::EnterTaskManager()::{lambda(int)#1},int,ngcore::TotalCosts)::{lambda(ngcore::TaskInfo&)#1}", calls: 1, size: 0.0005058, value: 0.0005058, min: 0.0005058, max: 0.0005058, avg: 0.0005058} , { name: "MeshOptimize3d::SwapImprove", calls: 10, size: 0.01581, value: 1.009, min: 0.08669, max: 0.1182, avg: 0.1009, children: [{ name: "ngcore::ParallelForRange<netgen::ElementIndex,netgen::MeshOptimize3d::SwapImprove(netgen::Mesh&,netgen::OPTIMIZEGOAL,netgen::NgBitArray const*)::{lambda(auto:1)#1}>(ngcore::T_Range<netgen::ElementIndex>,netgen::MeshOptimize3d::SwapImprove(netgen::Mesh&,netgen::OPTIMIZEGOAL,netgen::NgBitArray const*)::{lambda(auto:1)#1},int,ngcore::TotalCosts)::{lambda(ngcore::TaskInfo&)#1}", calls: 10, size: 0.0167, value: 0.0167, min: 0.001201, max: 0.003125, avg: 0.00167} , { name: "Build edges", calls: 10, size: 0.002445, value: 0.01493, min: 0.001334, max: 0.001823, avg: 0.001493, children: [{ name: "ngcore::ParallelFor<unsigned long,netgen::BuildEdgeList<netgen::ElementIndex>(netgen::Mesh const&,ngcore::Table<netgen::ElementIndex,netgen::PointIndex>const&,ngcore::Array<std::tuple<netgen::PointIndex,netgen::PointIndex>,unsigned long>&)::{lambda(int)#1}>(ngcore::T_Range<unsigned long>,netgen::BuildEdgeList<netgen::ElementIndex>(netgen::Mesh const&,ngcore::Table<netgen::ElementIndex,netgen::PointIndex>const&,ngcore::Array<std::tuple<netgen::PointIndex,netgen::PointIndex>,unsigned long>&)::{lambda(int)#1},int,ngcore::TotalCosts)::{lambda(ngcore::TaskInfo&)#1}", calls: 10, size: 0.01249, value: 0.01249, min: 0.001144, max: 0.001359, avg: 0.001249}]} , { name: "CreateSortedTable", calls: 10, size: 0.0009002, value: 0.08453, min: 0.007942, max: 0.009716, avg: 0.008453, children: [{ name: "ngcore::ParallelForRange<netgen::PointIndex,ngcore::CreateSortedTable<netgen::ElementIndex,netgen::PointIndex,ngcore::T_Range<netgen::ElementIndex>,netgen::Mesh::CreatePoint2ElementTable(std::optional<ngcore::BitArray>)const::{lambda(auto:1&,netgen::ElementIndex)#1}>(ngcore::T_Range<netgen::ElementIndex>const&,netgen::Mesh::CreatePoint2ElementTable(std::optional<ngcore::BitArray>)const::{lambda(auto:1&,netgen::ElementIndex)#1}const&,std::optional<unsigned long>)::{lambda(auto:1)#1}>(ngcore::T_Range<netgen::PointIndex>,ngcore::Table,int,ngcore::TotalCosts)::{lambda(ngcore::TaskInfo&)#1}", calls: 10, size: 0.01044, value: 0.01044, min: 0.0009316, max: 0.001136, avg: 0.001044} , { name: "CreateTable", calls: 10, size: 0.006336, value: 0.07319, min: 0.006828, max: 0.008281, avg: 0.007319, children: [{ name: "ngcore::ParallelForRange<netgen::ElementIndex,ngcore::CreateTable<netgen::ElementIndex,netgen::PointIndex,ngcore::T_Range<netgen::ElementIndex>,netgen::Mesh::CreatePoint2ElementTable(std::optional<ngcore::BitArray>)const::{lambda(auto:1&,netgen::ElementIndex)#1}>(ngcore::T_Range<netgen::ElementIndex>const&,netgen::Mesh::CreatePoint2ElementTable(std::optional<ngcore::BitArray>)const::{lambda(auto:1&,netgen::ElementIndex)#1}const&,std::optional<unsigned long>)::{lambda(auto:1)#1}>(ngcore::T_Range<netgen::ElementIndex>,ngcore::Table,int,ngcore::TotalCosts)::{lambda(ngcore::TaskInfo&)#1}", calls: 20, size: 0.05508, value: 0.05508, min: 0.002473, max: 0.003096, avg: 0.002754} , { name: "ngcore::TablePrefixSum2<unsigned int>(ngcore::FlatArray<unsigned int,unsigned long>)::{lambda(ngcore::TaskInfo)#1}", calls: 10, size: 0.005537, value: 0.005537, min: 0.000449, max: 0.0006319, avg: 0.0005537} , { name: "ngcore::TablePrefixSum2<unsigned int>(ngcore::FlatArray<unsigned int,unsigned long>)::{lambda(ngcore::TaskInfo)#2}", calls: 10, size: 0.006237, value: 0.006237, min: 0.0004139, max: 0.0007709, avg: 0.0006237}]}]} , { name: "MeshOptimize3d::SwapImprove loop", calls: 10, size: 0.000845, value: 0.01013, min: 0.0009062, max: 0.001345, avg: 0.001013, children: [{ name: "ngcore::ParallelForRange<unsigned long,netgen::MeshOptimize3d::SwapImprove(netgen::Mesh&,netgen::OPTIMIZEGOAL,netgen::NgBitArray const*)::{lambda(auto:1)#2}>(ngcore::T_Range<unsigned long>,netgen::MeshOptimize3d::SwapImprove(netgen::Mesh&,netgen::OPTIMIZEGOAL,netgen::NgBitArray const*)::{lambda(auto:1)#2},int,ngcore::TotalCosts)::{lambda(ngcore::TaskInfo&)#1}", calls: 10, size: 0.009288, value: 0.009288, min: 0.0008396, max: 0.001109, avg: 0.0009288}]} , { name: "Mesh::BuildBoundaryEdges", calls: 10, size: 0.2308, value: 0.2308, min: 6.6e-05, max: 0.03847, avg: 0.02308} , { name: "Mesh::Compress", calls: 10, size: 0.05098, value: 0.6359, min: 0.06189, max: 0.06688, avg: 0.06359, children: [{ name: "ngcore::ParallelForRange<netgen::ElementIndex,netgen::Mesh::Compress()::{lambda(auto:1)#1}>(ngcore::T_Range<netgen::ElementIndex>,netgen::Mesh::Compress()::{lambda(auto:1)#1},int,ngcore::TotalCosts)::{lambda(ngcore::TaskInfo&)#1}", calls: 10, size: 0.2057, value: 0.2057, min: 0.01964, max: 0.02194, avg: 0.02057} , { name: "ngcore::ParallelForRange<netgen::SurfaceElementIndex,netgen::Mesh::Compress()::{lambda(auto:1)#2}>(ngcore::T_Range<netgen::SurfaceElementIndex>,netgen::Mesh::Compress()::{lambda(auto:1)#2},int,ngcore::TotalCosts)::{lambda(ngcore::TaskInfo&)#1}", calls: 10, size: 0.03899, value: 0.03899, min: 0.002848, max: 0.004941, avg: 0.003899} , { name: "ngcore::ParallelForRange<netgen::ElementIndex,netgen::Mesh::Compress()::{lambda(auto:1)#3}>(ngcore::T_Range<netgen::ElementIndex>,netgen::Mesh::Compress()::{lambda(auto:1)#3},int,ngcore::TotalCosts)::{lambda(ngcore::TaskInfo&)#1}", calls: 10, size: 0.02353, value: 0.02353, min: 0.002251, max: 0.002537, avg: 0.002353} , { name: "ngcore::ParallelForRange<netgen::SurfaceElementIndex,netgen::Mesh::Compress()::{lambda(auto:1)#4}>(ngcore::T_Range<netgen::SurfaceElementIndex>,netgen::Mesh::Compress()::{lambda(auto:1)#4},int,ngcore::TotalCosts)::{lambda(ngcore::TaskInfo&)#1}", calls: 10, size: 0.01963, value: 0.01963, min: 0.001854, max: 0.002145, avg: 0.001963} , { name: "Mesh::LinkSurfaceElements", calls: 10, size: 0.07194, value: 0.07194, min: 0.006903, max: 0.008726, avg: 0.007194} , { name: "Mesh::CalcSurfacesOfNode", calls: 10, size: 0.04684, value: 0.2251, min: 0.02174, max: 0.02447, avg: 0.02251, children: [{ name: "Mesh::CalcSurfacesOfNode, pointloop", calls: 10, size: 0.02418, value: 0.02418, min: 0.002393, max: 0.002436, avg: 0.002418} , { name: "Mesh::CalcSurfacesOfNode - surfelementht", calls: 10, size: 0.04567, value: 0.04567, min: 0.004307, max: 0.005217, avg: 0.004567} , { name: "Mesh::CalcSurfacesOfNode - surf on node", calls: 10, size: 0.1084, value: 0.1084, min: 0.01048, max: 0.01191, avg: 0.01084}]}]}]} , { name: "FreeOpenElementsEnvironment", calls: 2, size: 0.02062, value: 0.02062, min: 0.009477, max: 0.01114, avg: 0.01031} , { name: "Mesh::Compress", calls: 1, size: 0.008939, value: 0.06715, min: 0.06715, max: 0.06715, avg: 0.06715, children: [{ name: "ngcore::ParallelForRange<netgen::ElementIndex,netgen::Mesh::Compress()::{lambda(auto:1)#1}>(ngcore::T_Range<netgen::ElementIndex>,netgen::Mesh::Compress()::{lambda(auto:1)#1},int,ngcore::TotalCosts)::{lambda(ngcore::TaskInfo&)#1}", calls: 1, size: 0.0205, value: 0.0205, min: 0.0205, max: 0.0205, avg: 0.0205} , { name: "ngcore::ParallelForRange<netgen::SurfaceElementIndex,netgen::Mesh::Compress()::{lambda(auto:1)#2}>(ngcore::T_Range<netgen::SurfaceElementIndex>,netgen::Mesh::Compress()::{lambda(auto:1)#2},int,ngcore::TotalCosts)::{lambda(ngcore::TaskInfo&)#1}", calls: 1, size: 0.005215, value: 0.005215, min: 0.005215, max: 0.005215, avg: 0.005215} , { name: "ngcore::ParallelForRange<netgen::ElementIndex,netgen::Mesh::Compress()::{lambda(auto:1)#3}>(ngcore::T_Range<netgen::ElementIndex>,netgen::Mesh::Compress()::{lambda(auto:1)#3},int,ngcore::TotalCosts)::{lambda(ngcore::TaskInfo&)#1}", calls: 1, size: 0.002144, value: 0.002144, min: 0.002144, max: 0.002144, avg: 0.002144} , { name: "ngcore::ParallelForRange<netgen::SurfaceElementIndex,netgen::Mesh::Compress()::{lambda(auto:1)#4}>(ngcore::T_Range<netgen::SurfaceElementIndex>,netgen::Mesh::Compress()::{lambda(auto:1)#4},int,ngcore::TotalCosts)::{lambda(ngcore::TaskInfo&)#1}", calls: 1, size: 0.001968, value: 0.001968, min: 0.001968, max: 0.001968, avg: 0.001968} , { name: "Mesh::LinkSurfaceElements", calls: 1, size: 0.006969, value: 0.006969, min: 0.006969, max: 0.006969, avg: 0.006969} , { name: "Mesh::CalcSurfacesOfNode", calls: 1, size: 0.004591, value: 0.02141, min: 0.02141, max: 0.02141, avg: 0.02141, children: [{ name: "Mesh::CalcSurfacesOfNode, pointloop", calls: 1, size: 0.002402, value: 0.002402, min: 0.002402, max: 0.002402, avg: 0.002402} , { name: "Mesh::CalcSurfacesOfNode - surfelementht", calls: 1, size: 0.004179, value: 0.004179, min: 0.004179, max: 0.004179, avg: 0.004179} , { name: "Mesh::CalcSurfacesOfNode - surf on node", calls: 1, size: 0.01024, value: 0.01024, min: 0.01024, max: 0.01024, avg: 0.01024}]}]}]};
+
+const chart_type = 'time';
+
+    const color = d3.scaleOrdinal(d3.schemePaired);
+
+    let getTime = (t) =>
+    {
+       if(t>=1000)  return (t/1000).toPrecision(4) + '  s';
+       if(t>=0.1)   return t.toPrecision(4) + ' ms';
+       if(t>=1e-4)  return (t*1e3).toPrecision(4) + ' us';
+
+       return (t/1e6).toPrecision(4) + ' ns';
+    };
+
+    const KB_ = 1024;
+    const MB_ = KB_*1024;
+    const GB_ = MB_*1024;
+    let getMemory = (m) =>
+    {
+       if(m>=GB_)  return (m/GB_).toPrecision(4) + ' GB';
+       if(m>=MB_)  return (m/MB_).toPrecision(4) + ' MB';
+       if(m>=KB_)  return (m/KB_).toPrecision(4) + ' KB';
+       return m.toPrecision(4) + ' B';
+    };
+
+    Sunburst()
+      .data(data)
+      .size('size')
+      .color(d => color(d.name))
+      .tooltipTitle((d, node) => { return node.parent ? node.parent.data.name + " &rarr; " + d.name : d.name; })
+      .tooltipContent((d, node) => {
+        if(chart_type=="memory")
+        {
+          return `Total Memory: <i>${getMemory(d.value)}</i> <br>`
+               + `Memory: <i>${getMemory(d.size)}</i>`
+        }
+        else
+        {
+          return `Time: <i>${getTime(d.value)}</i> <br>`
+               + `calls: <i>${d.calls}</i> <br>`
+               + `min: <i>${getTime(d.min)}</i> <br>`
+               + `max: <i>${getTime(d.max)}</i> <br>`
+               + `avg: <i>${getTime(d.avg)}</i>`
+        }
+      })
+      (document.getElementById('chart'));
+
+      // Line breaks in tooltip
+      var all = document.getElementsByClassName('sunbirst-tooltip');
+      for (var i = 0; i < all.length; i++) {
+          all[i].white_space = "";
+      }
+  </script>
+</body>
+

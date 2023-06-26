@@ -1,0 +1,69 @@
+
+<head>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://unpkg.com/sunburst-chart"></script>
+
+  <style>body { margin: 0 }</style>
+
+</head>
+<body>
+  <div id="chart"></div>
+
+  <script>
+    const data = 
+{ name: "all", calls: 1, size: 0, value: 323.9, min: 323.9, max: 323.9, avg: 323.9, children: [{ name: "ngcore::ParallelFor<int,ngcore::EnterTaskManager()::{lambda(int)#1}>(ngcore::T_Range<int>,ngcore::EnterTaskManager()::{lambda(int)#1},int,ngcore::TotalCosts)::{lambda(ngcore::TaskInfo&)#1}", calls: 1, size: 0.001405, value: 0.001405, min: 0.001405, max: 0.001405, avg: 0.001405} , { name: "NewtonSolver.Solve", calls: 1, size: 4.061, value: 323.3, min: 323.3, max: 323.3, avg: 323.3, children: [{ name: "Assemble Linearization", calls: 2, size: 0.04301, value: 311, min: 48.85, max: 262.1, avg: 155.5, children: [{ name: "Assemble Linearization - SpecialElements", calls: 2, size: 0.0008102, value: 0.003857, min: 0.001928, max: 0.001929, avg: 0.001928, children: [{ name: "ngcore::ParallelForRange<unsigned long,ngcomp::S_BilinearForm<double>::AssembleLinearization(ngla::BaseVector const&,ngcore::LocalHeap&,bool)::{lambda(ngcore::T_Range<unsigned long>)#3}>(ngcore::T_Range<unsigned long>,ngcomp::S_BilinearForm<double>::AssembleLinearization(ngla::BaseVector const&,ngcore::LocalHeap&,bool)::{lambda(ngcore::T_Range<unsigned long>)#3},int,ngcore::TotalCosts)::{lambda(ngcore::TaskInfo&)#1}", calls: 2, size: 0.003047, value: 0.003047, min: 0.001475, max: 0.001572, avg: 0.001523}]} , { name: "Assemble Linearization - volume", calls: 3, size: 0.3744, value: 308.4, min: 0.4946, max: 260.4, avg: 102.8, children: [{ name: "ngcomp::IterateElements(ngcomp::FESpace const&,ngfem::VorB,ngcore::LocalHeap&,std::function<void(ngcomp::FESpace::Element,ngcore::LocalHeap&)>const&)::{lambda(ngcore::TaskInfo const&)#1}", calls: 86, size: 308.1, value: 308.1, min: 0.01984, max: 26.35, avg: 3.582}]} , { name: "S_BaseVector::SetScalar", calls: 2, size: 0.003901, value: 2.473, min: 1.188, max: 1.285, avg: 1.237, children: [{ name: "ngcore::ParallelForRange<unsigned long,ngla::S_BaseVector<double>::SetScalar(double)::{lambda(ngcore::T_Range<unsigned long>)#1}>(ngcore::T_Range<unsigned long>,ngla::S_BaseVector<double>::SetScalar(double)::{lambda(ngcore::T_Range<unsigned long>)#1},int,ngcore::TotalCosts)::{lambda(ngcore::TaskInfo&)#1}", calls: 2, size: 2.469, value: 2.469, min: 1.186, max: 1.283, avg: 1.235}]}]} , { name: "Apply Matrix", calls: 2, size: 0.003056, value: 8.308, min: 2.6, max: 5.708, avg: 4.154, children: [{ name: "Apply Matrix - DG", calls: 2, size: 0.0001325, value: 0.0001325, min: 2.218e-05, max: 0.0001103, avg: 6.626e-05} , { name: "Apply Matrix - boundary", calls: 1, size: 0.006927, value: 0.07222, min: 0.07222, max: 0.07222, avg: 0.07222, children: [{ name: "ngcomp::IterateElements(ngcomp::FESpace const&,ngfem::VorB,ngcore::LocalHeap&,std::function<void(ngcomp::FESpace::Element,ngcore::LocalHeap&)>const&)::{lambda(ngcore::TaskInfo const&)#1}", calls: 10, size: 0.06529, value: 0.06529, min: 0.00426, max: 0.01238, avg: 0.006529}]} , { name: "Apply Matrix - volume", calls: 2, size: 0.0775, value: 8.232, min: 2.599, max: 5.634, avg: 4.116, children: [{ name: "ngcomp::IterateElements(ngcomp::FESpace const&,ngfem::VorB,ngcore::LocalHeap&,std::function<void(ngcomp::FESpace::Element,ngcore::LocalHeap&)>const&)::{lambda(ngcore::TaskInfo const&)#1}", calls: 76, size: 8.155, value: 8.155, min: 0.0379, max: 1.142, avg: 0.1073}]}]} , { name: "S_BaseVector::SetScalar", calls: 2, size: 0.001593, value: 0.01165, min: 0.005339, max: 0.006308, avg: 0.005823, children: [{ name: "ngcore::ParallelForRange<unsigned long,ngla::S_BaseVector<double>::SetScalar(double)::{lambda(ngcore::T_Range<unsigned long>)#1}>(ngcore::T_Range<unsigned long>,ngla::S_BaseVector<double>::SetScalar(double)::{lambda(ngcore::T_Range<unsigned long>)#1},int,ngcore::TotalCosts)::{lambda(ngcore::TaskInfo&)#1}", calls: 2, size: 0.01005, value: 0.01005, min: 0.004863, max: 0.005191, avg: 0.005027}]}]}]};
+
+const chart_type = 'time';
+
+    const color = d3.scaleOrdinal(d3.schemePaired);
+
+    let getTime = (t) =>
+    {
+       if(t>=1000)  return (t/1000).toPrecision(4) + '  s';
+       if(t>=0.1)   return t.toPrecision(4) + ' ms';
+       if(t>=1e-4)  return (t*1e3).toPrecision(4) + ' us';
+
+       return (t/1e6).toPrecision(4) + ' ns';
+    };
+
+    const KB_ = 1024;
+    const MB_ = KB_*1024;
+    const GB_ = MB_*1024;
+    let getMemory = (m) =>
+    {
+       if(m>=GB_)  return (m/GB_).toPrecision(4) + ' GB';
+       if(m>=MB_)  return (m/MB_).toPrecision(4) + ' MB';
+       if(m>=KB_)  return (m/KB_).toPrecision(4) + ' KB';
+       return m.toPrecision(4) + ' B';
+    };
+
+    Sunburst()
+      .data(data)
+      .size('size')
+      .color(d => color(d.name))
+      .tooltipTitle((d, node) => { return node.parent ? node.parent.data.name + " &rarr; " + d.name : d.name; })
+      .tooltipContent((d, node) => {
+        if(chart_type=="memory")
+        {
+          return `Total Memory: <i>${getMemory(d.value)}</i> <br>`
+               + `Memory: <i>${getMemory(d.size)}</i>`
+        }
+        else
+        {
+          return `Time: <i>${getTime(d.value)}</i> <br>`
+               + `calls: <i>${d.calls}</i> <br>`
+               + `min: <i>${getTime(d.min)}</i> <br>`
+               + `max: <i>${getTime(d.max)}</i> <br>`
+               + `avg: <i>${getTime(d.avg)}</i>`
+        }
+      })
+      (document.getElementById('chart'));
+
+      // Line breaks in tooltip
+      var all = document.getElementsByClassName('sunbirst-tooltip');
+      for (var i = 0; i < all.length; i++) {
+          all[i].white_space = "";
+      }
+  </script>
+</body>
+

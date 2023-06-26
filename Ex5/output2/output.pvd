@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<VTKFile type ="Collection" version="1.0" byte_order="LittleEndian">
+<Collection>
+<DataSet timestep="0" file="output.vtu"/>
+<DataSet timestep="1.11111" file="output_step00001.vtu"/>
+<DataSet timestep="2.22222" file="output_step00002.vtu"/>
+<DataSet timestep="3.33333" file="output_step00003.vtu"/>
+<DataSet timestep="4.44444" file="output_step00004.vtu"/>
+<DataSet timestep="5.55556" file="output_step00005.vtu"/>
+<DataSet timestep="6.66667" file="output_step00006.vtu"/>
+<DataSet timestep="7.77778" file="output_step00007.vtu"/>
+<DataSet timestep="8.88889" file="output_step00008.vtu"/>
+</Collection>
+</VTKFile>
