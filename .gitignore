@@ -773,9 +773,9 @@ FodyWeavers.xsd
 *.sln.iml
 
 # #NGSolve
-# *.trace
-# *.html
-# *.vtu
+*.trace
+*.html
+*.vtu
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
 
