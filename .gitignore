@@ -772,10 +772,10 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
-#NGSolve
-*.trace
-*.html
-*.vtu
+# #NGSolve
+# *.trace
+# *.html
+# *.vtu
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
 
